@@ -1,0 +1,25 @@
+<div id="author-dialog-wrapper">
+    <header id="modal-header">
+        <h1 id="modal-title">Add new author</h1>
+    </header>
+    <section id="modal-body">
+        <div class="container" style="padding: 3mm 0 6mm 0">
+            <div class="row" style="padding: 1mm 0 1mm 0">
+                <div class="column col-sm-2" style="text-align: right">First Name:</div>
+                <div class="column col-sm-10">
+                    <input [(ngModel)]="author.firstName" type="text" name="firstName" autofocus/>
+                </div>
+            </div>
+            <div class="row" style="padding: 1mm 0 1mm 0">
+                <div class="column col-sm-2" style="text-align: right">Last Name:</div>
+                <div class="column col-sm-10">
+                    <input [(ngModel)]="author.lastName" type="text" name="lastName"/>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer id="modal-footer">
+        <button type="button" class="btn btn-primary"  id="modal-action-button" (click)="addAuthor()">Add</button>
+        <button type="button" class="btn btn-secondary"  id="modal-cancel-button" (click)="cancel()">Cancel</button>
+    </footer>
+</div>

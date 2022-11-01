@@ -1,0 +1,43 @@
+
+<h5>Update a book</h5>
+
+<div class="container" style="padding: 3mm 0 6mm 0">
+    <div class="row" style="padding: 1mm 0 1mm 0">
+        <div class="column col-sm-2" style="text-align: right">Name:</div>
+        <div class="column col-sm-10">
+            <input [(ngModel)]="book.name" type="text" name="name" autofocus/>
+        </div>
+    </div>
+    <div class="row" style="padding: 1mm 0 1mm 0">
+        <div class="column col-sm-2" style="text-align: right">ISBN:</div>
+        <div class="column col-sm-10">
+            <input [(ngModel)]="book.isbn" type="text" name="isbn"/>
+        </div>
+    </div>
+    <div class="row" style="padding: 1mm 0 1mm 0">
+        <div class="column col-sm-2" style="text-align: right">Annotation:</div>
+        <div class="column col-sm-10">
+            <textarea [(ngModel)]="book.annotation" name="annotation" rows="4" cols="50">
+
+            </textarea>
+        </div>
+    </div>
+    <div class="row" style="padding: 1mm 0 1mm 0">
+    </div>
+    <div class="row" style="padding: 1mm 0 1mm 0">
+        <div class="column col-sm-2" style="text-align: right">Authors:</div>
+        <div class="column col-sm-10">
+            <select [(ngModel)]="selectedAuthor" name="authors" size="5" width>
+                <option *ngFor="let author of book.authors" [ngValue]="author">{{author|authorPipe}}</option>
+            </select>
+            <div style="padding: 3mm 0 1mm 0">
+                <button type="button" class="btn btn-primary" (click)="addAuthor()">Add author</button>&nbsp;
+                <button type="button" class="btn btn-secondary" (click)="removeAuthor()">Remove author</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<button type="button" class="btn btn-primary" (click)="updateBook()">Update</button>&nbsp;
+<button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>

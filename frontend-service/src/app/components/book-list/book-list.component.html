@@ -1,0 +1,32 @@
+<div *ngIf="isBookshelfEmpty()" style="padding: 3mm 0 3mm 0">
+    <h5>Available books</h5>
+    <div *ngIf="keyword"><p>Searching for "{{keyword}}"</p></div>
+
+    <div class="container-fluid">
+        <div class="row" *ngFor="let book of bookList">
+            <div class="col-sm-2">
+                <img src="/assets/img/285636_book_icon-3.png">
+            </div>
+            <div class="col-sm-10" style="padding: 3mm">
+                <div>{{book.name}}</div>
+                <div><b>{{book.isbn}}</b></div>
+                <div>{{book.annotation}}</div>
+                <div style="padding: 3mm 0 3mm 0">
+                    <button type="button" class="btn btn-primary" (click)="bookUpdate(book.id)">Update</button>&nbsp;
+                    <button type="button" class="btn btn-primary" (click)="bookRemove(book.id)">Remove</button>
+                </div>
+            </div>
+            <hr>
+        </div>
+    </div>
+</div>
+<div *ngIf="!isBookshelfEmpty()" style="padding: 3mm 0 3mm 0">
+    <div *ngIf="!keyword">
+        <h5>Bookshelf is empty.</h5>
+    </div>
+    <div *ngIf="keyword">
+        <h5>No matching books found.</h5>
+    </div>
+</div>
+
+<button type="button" class="btn btn-primary" (click)="bookAdd()">Add a new book</button>&nbsp;
