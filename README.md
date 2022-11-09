@@ -22,3 +22,24 @@ A few key things Schnitzel GmbH will be looking at are:
 here
 
 Do not hesitate to ask any questions regarding the requirements, in case if something is not clear.
+
+## Install
+The system is composed of a frontend application developed using [angular](https://angular.io) and a backend api developed using [spring boot](https://spring.io). Persistence is done in memory using an h2 database.
+
+Java development kit and maven need to be installed to properly run the backend.
+```
+$ cd api-service/
+$ mvn spring-boot:run
+```
+
+Nodejs, npm, and ng need to be installed to bring the frontend application up.
+```
+$ cd frontend-service/
+$ ng serve
+``` 
+
+The application can be accessed using [http://localhost:4200/](http://localhost:4200/)
+
+The h2 console is available to inspect the proper persistence of objects in the system, and can be accessed using [http://localhost:8080/h2-console/](http://localhost:8080/h2-console/), the datasource url is **jdbc:h2:mem:schnitzel**. 
+
+An importable [postman](https://www.postman.com) collection [file](postman.json) is available to test various api backend features.
