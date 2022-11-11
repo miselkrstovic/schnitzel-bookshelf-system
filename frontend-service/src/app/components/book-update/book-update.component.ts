@@ -15,6 +15,7 @@ export class BookUpdateComponent implements OnInit {
 
   public book: Book;
   public selectedAuthor?: Author = undefined;
+  public lastError?: string;
 
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -34,7 +35,7 @@ export class BookUpdateComponent implements OnInit {
             case 200:
               break;
             default:
-              alert(err.error);
+              this.lastError = err.error;
           }
         },
         complete: () => {} 
@@ -55,7 +56,7 @@ export class BookUpdateComponent implements OnInit {
             this.router.navigate(navigationDetails);
             break;
           default:
-            alert(err.error);
+            this.lastError = err.error;
         }
       },
       complete: () => {} 

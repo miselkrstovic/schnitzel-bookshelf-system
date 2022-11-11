@@ -15,6 +15,7 @@ export class BookAddComponent {
 
   public book: Book;
   public selectedAuthor?: Author = undefined;
+  public lastError?: string;
 
   constructor(private router: Router,
     private service: SchnitzelService,
@@ -35,7 +36,7 @@ export class BookAddComponent {
             this.router.navigate(navigationDetails);
             break;
           default:
-            alert(err.error);
+            this.lastError = err.error;
         }
       },
       complete: () => {} 

@@ -1,17 +1,20 @@
-
 <h5>Add a new book</h5>
+
+<div *ngIf="lastError" class="alert alert-danger">
+    <strong>Error!</strong> {{lastError}}
+</div>
 
 <div class="container" style="padding: 3mm 0 6mm 0">
     <div class="row" style="padding: 1mm 0 1mm 0">
         <div class="column col-sm-2" style="text-align: right">Name:</div>
         <div class="column col-sm-10">
-            <input [(ngModel)]="book.name" type="text" name="name" autofocus/>
+            <input [(ngModel)]="book.name" type="text" name="name" autofocus required minlength="4"/>
         </div>
     </div>
     <div class="row" style="padding: 1mm 0 1mm 0">
         <div class="column col-sm-2" style="text-align: right">ISBN:</div>
         <div class="column col-sm-10">
-            <input [(ngModel)]="book.isbn" type="text" name="isbn"/>
+            <input [(ngModel)]="book.isbn" type="text" name="isbn" required minlength="10"/>
         </div>
     </div>
     <div class="row" style="padding: 1mm 0 1mm 0">
