@@ -45,18 +45,18 @@ public class BookController {
 			if (book.isPresent()) {
 				return ResponseEntity.ok(book.get());
 			} else {
-				return new ResponseEntity("Book was not found", HttpStatus.NOT_FOUND);
+				return new ResponseEntity("Book was not found in bookshelf", HttpStatus.NOT_FOUND);
 			}
 		} else {
-			return new ResponseEntity("Illegal object sent", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity("Illegal parameters were sent", HttpStatus.BAD_REQUEST);
 		}
 	}
 	
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping({"/books", "/books/"})
 	public ResponseEntity<String> addBook(@RequestBody Book book) throws Exception {
-		if (book != null && !StringUtils.isEmpty(book.getIsbn()) && !StringUtils.isEmpty(book.getName())
-				&& !StringUtils.isEmpty(book.getAnnotation())) {
+		if (book != null && !isBlankString(book.getIsbn()) && !isBlankString(book.getName())
+				&& !isBlankString(book.getAnnotation())) {
 			try {
 				String isbn = book.getIsbn().trim();
 				String name = book.getName().trim();
@@ -64,23 +64,23 @@ public class BookController {
 
 				try {
 					bookService.addBook(isbn, name, annotation, book.getAuthors());
-					return new ResponseEntity<>("Book was successfully added", HttpStatus.OK);
+					return new ResponseEntity<>("Book was successfully added to bookshelf", HttpStatus.OK);
 				} catch (Exception ex) {
 					return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
 				}
 			} catch (Exception ex) {
-				return new ResponseEntity("Illegal object sent (missing fields)", HttpStatus.BAD_REQUEST);
+				return new ResponseEntity("Illegal parameters were sent (missing fields)", HttpStatus.BAD_REQUEST);
 			}
 		} else {
-			return new ResponseEntity("Illegal object sent", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity("Illegal parameters were sent", HttpStatus.BAD_REQUEST);
 		}
 	}
 
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PutMapping("/books/{bookId}")
 	public ResponseEntity<String> updateBook(@PathVariable Long bookId, @RequestBody Book book) throws Exception {
-		if (book != null && !StringUtils.isEmpty(book.getIsbn()) && !StringUtils.isEmpty(book.getName())
-				&& !StringUtils.isEmpty(book.getAnnotation())) {
+		if (book != null && !isBlankString(book.getIsbn()) && !isBlankString(book.getName())
+				&& !isBlankString(book.getAnnotation())) {
 			try {
 				String isbn = book.getIsbn().trim();
 				String name = book.getName().trim();
@@ -88,15 +88,15 @@ public class BookController {
 
 				try {
 					bookService.updateBook(bookId, isbn, name, annotation, book.getAuthors());
-					return new ResponseEntity<>("Book was successfully updated", HttpStatus.OK);
+					return new ResponseEntity<>("Book details were successfully updated", HttpStatus.OK);
 				} catch (Exception ex) {
 					return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
 				}
 			} catch (Exception ex) {
-				return new ResponseEntity("Illegal object sent (missing fields)", HttpStatus.BAD_REQUEST);
+				return new ResponseEntity("Illegal parameters were sent (missing fields)", HttpStatus.BAD_REQUEST);
 			}
 		} else {
-			return new ResponseEntity("Illegal object sent", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity("Illegal parameters were sent", HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -105,7 +105,7 @@ public class BookController {
 	public ResponseEntity<String> deleteBook(@PathVariable Long bookId) throws Exception {
 		try {
 			bookService.deleteBook(bookId);
-			return new ResponseEntity<>("Book was successfully deleted", HttpStatus.OK);
+			return new ResponseEntity<>("Book was successfully deleted from bookshelf", HttpStatus.OK);
 		} catch (Exception ex) {
 			return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
 		}
@@ -121,15 +121,15 @@ public class BookController {
 
 				try {
 					bookService.addAuthor(bookId, firstName, lastName);
-					return new ResponseEntity<>("Author was successfully added", HttpStatus.OK);
+					return new ResponseEntity<>("Author was successfully added to book details", HttpStatus.OK);
 				} catch (Exception ex) {
 					return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
 				}
 			} catch (Exception ex) {
-				return new ResponseEntity("Illegal object sent (missing fields)", HttpStatus.BAD_REQUEST);
+				return new ResponseEntity("Illegal parameters were sent (missing fields)", HttpStatus.BAD_REQUEST);
 			}
 		} else {
-			return new ResponseEntity("Illegal object sent", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity("Illegal parameters were sent", HttpStatus.BAD_REQUEST);
 		}
 	}
 
@@ -150,15 +150,15 @@ public class BookController {
 
 				try {
 					bookService.updateAuthor(bookId, authorId, firstName, lastName);
-					return new ResponseEntity<>("Author was successfully updated", HttpStatus.OK);
+					return new ResponseEntity<>("Author details were successfully updated", HttpStatus.OK);
 				} catch (Exception ex) {
 					return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
 				}
 			} catch (Exception ex) {
-				return new ResponseEntity("Illegal object sent (missing fields)", HttpStatus.BAD_REQUEST);
+				return new ResponseEntity("Illegal parameters were sent (missing fields)", HttpStatus.BAD_REQUEST);
 			}
 		} else {
-			return new ResponseEntity("Illegal object sent", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity("Illegal parameters were sent", HttpStatus.BAD_REQUEST);
 		}
 	}
 
@@ -171,6 +171,10 @@ public class BookController {
 		} catch (Exception ex) {
 			return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
 		}
+	}
+	
+	public boolean isBlankString(String string) {
+	    return string == null || string.isBlank();
 	}
 
 }
