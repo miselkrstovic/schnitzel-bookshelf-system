@@ -9,23 +9,47 @@
 
 <div class="container" style="padding: 3mm 0 6mm 0">
     <div class="row" style="padding: 1mm 0 1mm 0">
-        <div class="column col-sm-2" style="text-align: right">Name:</div>
+        <div class="column col-sm-2" style="text-align: right">Name:*</div>
         <div class="column col-sm-10">
-            <input [(ngModel)]="book.name" type="text" name="name" autofocus required minlength="4"/>
+            <input [(ngModel)]="book.name" type="text" name="name" #name="ngModel" autofocus required minlength="4"/>
+            <div *ngIf="name.invalid && (name.dirty || name.touched)" style="color: red;">
+                <div *ngIf="name.errors?.['required']">
+                    Book name is required
+                </div>
+                <div *ngIf="name.errors?.['minlength']">
+                    Book name must be at least 4 characters long
+                </div>
+            </div>
         </div>
     </div>
     <div class="row" style="padding: 1mm 0 1mm 0">
-        <div class="column col-sm-2" style="text-align: right">ISBN:</div>
+        <div class="column col-sm-2" style="text-align: right">ISBN:*</div>
         <div class="column col-sm-10">
-            <input [(ngModel)]="book.isbn" type="text" name="isbn" required minlength="10"/>
+            <input [(ngModel)]="book.isbn" type="text" name="isbn" #isbn="ngModel" required minlength="10"/>
+            <div *ngIf="isbn.invalid && (isbn.dirty || isbn.touched)" style="color: red;">
+                <div *ngIf="isbn.errors?.['required']">
+                    ISBN number is required
+                </div>
+                <div *ngIf="isbn.errors?.['minlength']">
+                    ISBN number must be at least 10 characters long
+                </div>
+            </div>
         </div>
     </div>
     <div class="row" style="padding: 1mm 0 1mm 0">
-        <div class="column col-sm-2" style="text-align: right">Annotation:</div>
+        <div class="column col-sm-2" style="text-align: right">Annotation:*</div>
         <div class="column col-sm-10">
-            <textarea [(ngModel)]="book.annotation" name="annotation" rows="4" cols="50">
+            <textarea [(ngModel)]="book.annotation" name="annotation" #annotation="ngModel" rows="4" cols="50" required minlength="160">
 
             </textarea>
+            <div *ngIf="annotation.invalid && (annotation.dirty || annotation.touched)" style="color: red;">
+                <div *ngIf="annotation.errors?.['required']">
+                    Book annotation is required
+                </div>
+                <div *ngIf="annotation.errors?.['minlength']">
+                    Book annotation must be at least 160 characters long
+                </div>
+            </div>
         </div>
     </div>
     <div class="row" style="padding: 1mm 0 1mm 0">
@@ -42,7 +66,6 @@
             </div>
         </div>
     </div>
-
 </div>
 
 <button type="button" class="btn btn-primary" (click)="updateBook()">Update</button>&nbsp;
