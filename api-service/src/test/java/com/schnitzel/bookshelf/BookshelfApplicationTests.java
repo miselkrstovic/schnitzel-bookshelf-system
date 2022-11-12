@@ -1,4 +1,4 @@
-package com.schnitzel.bookshelf.bookshelf;
+package com.schnitzel.bookshelf;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

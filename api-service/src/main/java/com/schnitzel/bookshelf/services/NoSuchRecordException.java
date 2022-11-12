@@ -1,4 +1,4 @@
-package com.schnitzel.bookshelf.bookshelf.services;
+package com.schnitzel.bookshelf.services;
 
 public class NoSuchRecordException extends Exception {
 	

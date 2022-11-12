@@ -1,4 +1,4 @@
-package com.schnitzel.bookshelf.bookshelf.models;
+package com.schnitzel.bookshelf.models;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
