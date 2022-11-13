@@ -25,13 +25,13 @@
     <div class="row" style="padding: 1mm 0 1mm 0">
         <div class="column col-sm-2" style="text-align: right">ISBN:*</div>
         <div class="column col-sm-10">
-            <input [(ngModel)]="book.isbn" type="text" name="isbn" #isbn="ngModel" required minlength="10"/>
+            <input [(ngModel)]="book.isbn" type="text" name="isbn" #isbn="ngModel" required pattern="{{this.isbnRegex}}"/>
             <div *ngIf="isbn.invalid && (isbn.dirty || isbn.touched)" style="color: red;">
                 <div *ngIf="isbn.errors?.['required']">
                     ISBN number is required
                 </div>
-                <div *ngIf="isbn.errors?.['minlength']">
-                    ISBN number must be at least 10 characters long
+                <div *ngIf="isbn.errors?.['pattern']">
+                    ISBN number has an invalid format (it must be ISBN-10 or ISBN-13)
                 </div>
             </div>
         </div>

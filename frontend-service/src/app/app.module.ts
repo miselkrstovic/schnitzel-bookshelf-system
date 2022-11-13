@@ -12,7 +12,7 @@ import { BookAddComponent } from './components/book-add/book-add.component';
 import { BookUpdateComponent } from './components/book-update/book-update.component';
 import { BookRemoveComponent } from './components/book-remove/book-remove.component';
 import { BookListComponent } from './components/book-list/book-list.component';
-import { AuthorPipe } from './models/author-pipe';
+import { AuthorPipe } from './models/author.pipe';
 import { AuthorDialogComponent } from './components/modal-dialog/author-dialog.components';
 
 @NgModule({
